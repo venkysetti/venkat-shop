@@ -1,0 +1,47 @@
+{% extends 'theme.html' %}
+
+{% block main %}
+<div class="containermy-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7 col-sm-9">
+            <div class="card shadow-sm p-4">
+                <h2 class="mb-4 text-center fw-bold">Create an Account</h2>
+                {%if error%}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>{{error}}</strong> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {%elif success%}
+                <div class="alert alert-success" role="alert">
+                        <strong>{{success}}</strong>
+                </div>
+                {%endif%}
+
+                <form method="POST" action="signup" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label fw-semibold">User Name</label>
+                        <input type="text" id="username" name="username" class="form-control" value="{{value.name}}" placeholder="Enter your username" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{value.email}}" placeholder="example@domain.com" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobile" class="form-label fw-semibold">Mobile Number (10-digit)</label>
+                        <input type="tel" id="mobile" name="mobile" class="form-control" value="{{value.mobile}}" placeholder="1234567890" pattern="[0-9]{10}" maxlength="10" required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-semibold">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter a strong password" required />
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-semibold">Signup</button>
+                </form>
+                <div class="text-center mt-3">
+                    <small class="text-muted">Already have an account? <a href="/login" class="text-warning fw-semibold">Login here</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

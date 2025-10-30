@@ -1,0 +1,121 @@
+{% extends 'theme.html' %}
+{% load static %}
+
+{% block main %}
+<style>
+    body {
+        background: linear-gradient(135deg, #e2eafc 0%, #a1c4fd 100%);
+    }
+    .category-btn-group {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+    .category-btn-group .btn {
+        min-width: 160px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        box-shadow: 0 2px 6px rgba(140,168,217,0.10);
+        transition: background 0.18s, color 0.15s, transform 0.2s;
+        padding: 10px 26px;
+    }
+    .category-btn-group .btn:hover, .category-btn-group .btn.active {
+        background: linear-gradient(45deg, #1976d2 40%, #a1c4fd 100%);
+        color: #fff;
+        transform: translateY(-2px) scale(1.05);
+    }
+
+    .card {
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        transition: transform 0.22s;
+        background: #fff;
+        margin-bottom: 1rem;
+    }
+    .card:hover {
+        transform: translateY(-8px) scale(1.025);
+        box-shadow: 0 8px 18px rgba(81, 103, 158, 0.15);
+    }
+    .card-header {
+        background: linear-gradient(90deg, #e2eafc 0%, #cfd9df 100%);
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        padding: 0;
+    }
+    .card-footer {
+        background: #f6f6f6;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+        text-align: center;
+        padding-top: 1rem;
+    }
+    .btn-book {
+        background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+        border: none;
+        color: #fff;
+        border-radius: 50px;
+        font-weight: 700;
+        padding: 0.6em 2em;
+        box-shadow: 0 4px 12px rgba(255, 75, 43, 0.4);
+        transition: background 0.3s, transform 0.3s;
+    }
+    .btn-book:hover {
+        background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+        transform: scale(1.05);
+        color: #fff;
+        box-shadow: 0 6px 16px rgba(255, 75, 43, 0.6);
+    }
+    .product-image {
+        width: 100%;
+        height: 300px;
+        object-fit: contain;
+        display: block;
+        background: #eef2f8;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        margin: 0 auto;
+    }
+</style>
+
+<div class="container mt-4">
+
+    <!-- CATEGORY BUTTON BAR -->
+    <div class="category-btn-group">
+        <a href="/" class="btn btn-outline-primary {% if not request.GET.cat %}active{% endif %}">All products</a>
+        {% for j in categorys %}
+        <a href="/?cat={{ j.id }}" class="btn btn-outline-primary {% if request.GET.cat|default:'' == j.id|stringformat:'s' %}active{% endif %}">
+            {{ j.name }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for i in products %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header p-0">
+                    <img src="{{ i.image.url }}" alt="image" class="product-image img-fluid">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="card-text"><strong>₹{{ i.price }}</strong></p>
+                </div>
+                <div class="card-footer">
+                    <form method="post" action="{% url 'add_to_cart' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ i.id }}">
+                        <input type="number" name="quantity" value="1" min="1" style="width: 60px; margin-right: 1rem;">
+                        <button type="submit" class="btn btn-book">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

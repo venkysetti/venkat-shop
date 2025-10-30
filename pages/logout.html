@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Logout - ShopHub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .logout-container {
+            background: white;
+            padding: 3rem 4rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .logout-container h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        .logout-container p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        .logout-container svg {
+            width: 80px;
+            margin-bottom: 1.5rem;
+            fill: #08a045;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #08a045;
+            color: white;
+            font-weight: 600;
+            padding: 0.85rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(8,160,69,0.3);
+        }
+        .btn:hover {
+            background-color: #06a03d;
+        }
+        @media (max-width: 480px) {
+            .logout-container {
+                padding: 2rem 1.5rem;
+            }
+            .logout-container h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <path d="M20 8a12 12 0 100 24h24a4 4 0 014 4v16a4 4 0 01-4 4H20a12 12 0 100-24h24v-4H20zM12 20a8 8 0 1116 0 8 8 0 01-16 0zm28 8v-4h4v4zm-8 8l6-6-6-6v4h-8v4h8z"/>
+        </svg>
+        <h1>Logged Out</h1>
+        <p>Thank you for visiting Arudra. You have logged out successfully.</p>
+        <a href="/login" class="btn">Log In Again</a>
+        <br /><br />
+        <a href="/" class="btn" style="background-color:#555; box-shadow:none;">Continue Shopping</a>
+    </div>
+</body>
+</html>

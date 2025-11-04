@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('shop.urls')),
     path("",views.home, name="home"),
     path("signup",views.signup),
     path("login/",views.login,name="login"),

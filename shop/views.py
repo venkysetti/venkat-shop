@@ -23,7 +23,7 @@ def home(request):
         'products': products,
         'categorys': categorys
     }
-    return render(request,'index.html',data)
+    return render(request,'shop/index.html',data)
 
 #signup folder
 def signup(request):
@@ -175,3 +175,5 @@ def place_order(request):
         return JsonResponse({'ok':False,'error':'Please login to place order'},status=401)
     CartItem.objects.filter(customer_id=customer_id).delete()
     return JsonResponse({'ok':True})
+def test(request):
+    return HttpResponse("Test view working!")
